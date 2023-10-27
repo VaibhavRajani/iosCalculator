@@ -41,7 +41,11 @@ struct ContentView: View {
     var buttonWidth: CGFloat {
         if horizontalSizeClass == .compact && verticalSizeClass == .regular {
             return (UIScreen.main.bounds.width - (5 * 12)) / 4
-        } else {
+        } 
+        else if horizontalSizeClass == .regular && verticalSizeClass == .regular {
+            return (UIScreen.main.bounds.width - (9 * 60)) / 2
+        }
+        else {
             return (UIScreen.main.bounds.width - (5 * 12)) / 13
         }
     }
@@ -51,7 +55,7 @@ struct ContentView: View {
             return (UIScreen.main.bounds.width - (6 * 12)) / 5
         }
         else if horizontalSizeClass == .regular && verticalSizeClass == .regular {
-            return (UIScreen.main.bounds.width - (9 * 60)) / 6
+            return (UIScreen.main.bounds.width - (9 * 60)) / 5
         }
         else {
             return (UIScreen.main.bounds.width - (8 * 60)) / 10
@@ -59,7 +63,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        if horizontalSizeClass == .compact && verticalSizeClass == .regular {
+        if (horizontalSizeClass == .compact && verticalSizeClass == .regular) {
             ZStack {
                 Color.black.edgesIgnoringSafeArea(.all)
                 
@@ -118,10 +122,10 @@ struct ContentView: View {
                     }
                     .padding()
                     
-                    ForEach(0..<landscapeButtons.count, id: \.self) { rowIndex in
+                    ForEach(0..<portraitButtons.count, id: \.self) { rowIndex in
                         HStack(spacing: 12) {
-                            ForEach(0..<landscapeButtons[rowIndex].count, id: \.self) { columnIndex in
-                                let button = landscapeButtons[rowIndex][columnIndex]
+                            ForEach(0..<portraitButtons[rowIndex].count, id: \.self) { columnIndex in
+                                let button = portraitButtons[rowIndex][columnIndex]
                                 Button(action: {
                                     self.didTap(button: button)
                                 }, label: {
